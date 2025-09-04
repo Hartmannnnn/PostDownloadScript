@@ -12,9 +12,10 @@ Set fso = CreateObject("Scripting.FileSystemObject")
  
  x=MsgBox("Copiare il file PLC sul controllo?",4)
  
- StartTime = Timer()
  ' Rispondo Si
  IF x = 6 Then
+	 'Avvio timer per capire quanto ci metto a scaricare progetto
+	 StartTime = Timer()
      ' Prelevo IP controllo da progetto PLC
      IpControllo = WshShell.ExpandEnvironmentStrings("%PRJCONN%")
      IpControllo = Mid(IpControllo, InStr(5, IpControllo, ":") + 1, 20)
