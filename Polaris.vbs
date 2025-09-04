@@ -67,21 +67,16 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 	 ' Per LogicLab 5.16 e successivi con progetto a cartelle
 	If fso.FolderExists(pathPlc & "src") Then
 		'Se sul controllo esiste la cartella /src la cancello per eliminare eventuali file eliminati in locale
-		 If fso.FolderExists("\\" & IpControllo & pathPLCsystem & "src") Then 
-			 fso.DeleteFile "\\" & IpControllo & pathPLCsystem & "src\*.*", true
-			 fso.DeleteFolder "\\" & IpControllo & pathPLCsystem & "src\*.*", true
-		 End if
-		 
-		'Se sul controllo esiste la cartella /Library la cancello per eliminare eventuali file eliminati in locale
-		 If fso.FolderExists("\\" & IpControllo & pathPLCsystem & "Library") Then 
-			 fso.DeleteFile "\\" & IpControllo & pathPLCsystem & "Library\*.*", true
-			 fso.DeleteFolder "\\" & IpControllo & pathPLCsystem & "Library\*.*", true
+		 If fso.FolderExists("\\" & IpControllo & pathPLCsystem & "src") Then
+			 fso.DeleteFolder "\\" & IpControllo & pathPLCsystem & "src", true
 		 End if
 
-		'Se sul controllo esiste la cartella /config la cancello
-		 If fso.FolderExists("\\" & IpControllo & pathPLCsystem & "config") Then
-			 fso.DeleteFile "\\" & IpControllo & pathPLCsystem & "config\*.*", true
-			 fso.DeleteFolder "\\" & IpControllo & pathPLCsystem & "config\*.*", true
+			 ' Copio la cartella locale \src sul controllo
+		 fso.CopyFolder pathPlc & "src", "\\" & IpControllo & pathPLCsystem, True
+		 
+		'Se sul controllo esiste la cartella /Library la cancello per eliminare eventuali file eliminati in locale
+		 If fso.FolderExists("\\" & IpControllo & pathPLCsystem & "Library") Then
+			 fso.DeleteFolder "\\" & IpControllo & pathPLCsystem & "Library", true
 		 End if
 
 		 'Se ho la cartella /Library nel progetto locale la copio
@@ -90,14 +85,17 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 			 fso.CopyFolder pathPlc & "Library", "\\" & IpControllo & pathPLCsystem, True
 		 End if
 
+		'Se sul controllo esiste la cartella /config la cancello
+		 If fso.FolderExists("\\" & IpControllo & pathPLCsystem & "config") Then
+			 fso.DeleteFolder "\\" & IpControllo & pathPLCsystem & "config", true
+		 End if	 
+
 		 'Se ho la cartella /config nel progetto locale la copio
 		 If fso.FolderExists(pathPlc & "config") Then
 			 ' Copio la cartella locale \config sul controllo
 			 fso.CopyFolder pathPlc & "config", "\\" & IpControllo & pathPLCsystem , True
 		 End if
 
-		 ' Copio la cartella locale \src sul controllo
-		 fso.CopyFolder pathPlc & "src", "\\" & IpControllo & pathPLCsystem, True
 	End if
 
 	 fso.CopyFile pathPlc & "*.pll" , "\\" & IpControllo & pathPLCsystem, True
@@ -121,6 +119,6 @@ Set fso = CreateObject("Scripting.FileSystemObject")
      'objNetwork.RemoveNetworkDrive "Q:"
 
      EndTime = Timer()
-     MsgBox("File Copiati, Tempo impiegato :" & FormatNumber(EndTime - StartTime, 2))
+     MsgBox("File Copiati, Tempo impiegato :" & FormatNumber(EndTime - StartTime, 3))
  End IF
 
