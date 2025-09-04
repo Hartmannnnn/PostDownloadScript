@@ -119,6 +119,6 @@ Set fso = CreateObject("Scripting.FileSystemObject")
      'objNetwork.RemoveNetworkDrive "Q:"
 
      EndTime = Timer()
-     MsgBox("File Copiati, Tempo impiegato :" & FormatNumber(EndTime - StartTime, 3))
+     MsgBox("File Copiati, Tempo impiegato: " & FormatNumber(EndTime - StartTime, 3) & " s")
  End IF
 
