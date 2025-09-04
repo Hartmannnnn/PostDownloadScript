@@ -1,4 +1,5 @@
 ' Verione 1.0 da usare 
+StartTime = Timer()
 
 Set WshShell = WScript.CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
@@ -118,7 +119,8 @@ Set fso = CreateObject("Scripting.FileSystemObject")
      ' Smappo l'unità di rete
      WshShell.RUN "net use \\" & IpControllo & "\d /DELETE"
      'objNetwork.RemoveNetworkDrive "Q:"
-     
-     MsgBox("File Copiati")
+
+     EndTime = Timer()
+     MsgBox("File Copiati, Tempo impiegato :" & FormatNumber(EndTime - StartTime, 2))
  End IF
- 
+
