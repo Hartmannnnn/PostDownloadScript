@@ -1,5 +1,4 @@
 ' Verione 1.0 da usare 
-StartTime = Timer()
 
 Set WshShell = WScript.CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
@@ -13,6 +12,7 @@ Set fso = CreateObject("Scripting.FileSystemObject")
  
  x=MsgBox("Copiare il file PLC sul controllo?",4)
  
+ StartTime = Timer()
  ' Rispondo Si
  IF x = 6 Then
      ' Prelevo IP controllo da progetto PLC
